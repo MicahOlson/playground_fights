@@ -10,10 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_181455) do
+ActiveRecord::Schema.define(version: 2021_03_23_210153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: :cascade do |t|
+    t.string "name"
+    t.string "class"
+    t.integer "health"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "characters_items", id: false, force: :cascade do |t|
+    t.bigint "characters_id"
+    t.bigint "items_id"
+    t.index ["characters_id"], name: "index_characters_items_on_characters_id"
+    t.index ["items_id"], name: "index_characters_items_on_items_id"
+  end
+
+  create_table "enemies", force: :cascade do |t|
+    t.string "name"
+    t.string "class"
+    t.integer "health"
+    t.integer "location_id"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "health_bonus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "enemy_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,4 +70,8 @@ ActiveRecord::Schema.define(version: 2021_03_23_181455) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "characters", "users"
+  add_foreign_key "enemies", "items"
+  add_foreign_key "enemies", "locations"
+  add_foreign_key "locations", "enemies"
 end
