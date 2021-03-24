@@ -11,12 +11,38 @@
 
   <body>
     <div class="container">
-      <%= link_to "Home", root_path %> |
-      <% if current_user %>
-        <%= current_user.email %> | <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path %> | <%= link_to "Sign in", new_user_session_path %>
-      <% end %>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Playground</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/characters">Characters <span class="sr-only">(current)</span></a></li>
+              <li><a href="/items">Items</a></li>
+              <li><a href="/enemies">Enemies</a></li>
+              <li><a href="/locations">Locations</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <% if current_user %>
+                <li><a href="/users/sign_out" data-method="delete"><%= current_user.email %> <span class="glyphicon glyphicon-log-out"></span></a></li>
+              <% else %>
+                <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <%= flash[:notice] %>
 
       <%= yield %>
 

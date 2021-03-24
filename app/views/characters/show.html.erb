@@ -1,0 +1,23 @@
+<h1><%= @character.name %></h1>
+<h2>HP:</h2><p><%= @character.health %></p>
+
+<h2>Items</h2>
+<% if @character.items.any? %>
+  <ul>
+    <% @character.items.each do |item| %>
+      <li><%= link_to item.item_name, item_path(item) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You character has no items yet.</p>
+<% end %>
+
+
+<p><%= link_to "Edit", edit_character_path(@character) %></p>
+<p><%= link_to "Delete", character_path(@character), :data =>
+  {
+    :confirm => "You sure?",
+    :method => "delete"
+  } %></p>
+
+<p><%= link_to "Return to characters", characters_path %></p>
