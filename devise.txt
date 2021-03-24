@@ -6,7 +6,7 @@ Depending on your application's configuration some manual setup may be required:
 
        config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-     In production, :host should be set to the actual host of your application.
+     In production, host should be set to the actual host of your application.
 
      * Required for all applications. *
 
@@ -84,3 +84,31 @@ Hoodie
 Wooly Willy
 Legos
 Silly Putty
+
+
+
+AdminsController  < ApplicationController
+  before_action :only => [:new, :edit] do
+    redirect_to new_user_session_path unless current_user && current_user.admin
+  end
+end
+
+def create
+    @recipe = Recipe.new(recipe_params)
+    @categories = Category.all
+    @ingredients = Ingredient.all
+    if @recipe.save
+      if params[:category_selection].to_i != 0
+        category = Category.find(params[:category_selection].to_i)
+        category.recipes << @recipe
+      end
+      if params[:ingredient_selection].to_i != 0
+        ingredient = Ingredient.find(params[:ingredient_selection].to_i)
+        ingredient.recipes << @recipe
+      end
+      flash[:notice] = 'Recipe successfully added!'
+      redirect_to recipes_path
+    else
+      render :new
+    end
+  end

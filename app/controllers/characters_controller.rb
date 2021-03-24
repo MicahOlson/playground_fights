@@ -1,4 +1,6 @@
 class CharactersController < ApplicationController
+  # before_action :authenticate_user!
+
   def index
     @characters = Character.all
     render :index
@@ -11,9 +13,10 @@ class CharactersController < ApplicationController
 
   def create
     @character = Character.new(character_params)
+    @character[:user_id] = current_user.id
     if @character.save
       flash[:notice] = 'Character was successfully created'
-      redirect characters_path
+      redirect_to characters_path
     else
       flash[:notice] = 'Character was not successfully created'
       render :new
@@ -22,6 +25,7 @@ class CharactersController < ApplicationController
 
   def show
     @character = Character.find(params[:id])
+    @items = Item.all
     render :show
   end
 
@@ -34,17 +38,17 @@ class CharactersController < ApplicationController
     @character = Character.find(params[:id])
     if @character.update
       flash[:notice] = 'Character was successfully updated'
-      redirect character_path
+      redirect_to character_path
     else
       flash[:notice] = 'Character was not successfully updated'
-      redirect :edit
+      redirect_to :edit
     end
   end
 
   def destroy
     Character.find(params[:id]).destroy
     flash[:notice] = 'Character was successfully deleted'
-    redirect characters_path
+    redirect_to characters_path
   end
 
   private

@@ -1,15 +1,15 @@
 X Users can create, edit, and delete an account
-* users can add, edit, and delete an image for their Character
+- users can add, edit, and delete an image for their Character
 * users will have an inventory of items that they can view and delete
 * users can visit locations
-* Admins can create, edit, and delete locations
-* Admins can create, edit, and delete items
-* Admins can create, edit, and delete enemies
+X Admins can create, edit, and delete locations
+X Admins can create, edit, and delete items
+X Admins can create, edit, and delete enemies
 * Users can fight enemies for items
 
 Project objectives:
     Code meets all standards from previous weeks.
-    User authentication is successfully implemented.
+X   User authentication is successfully implemented.
 X   Two or more models in one-to-many or many-to-many relationship.
     SimpleCov is included and reports at least 80% test coverage.
     User authorization is successfully implemented. (Individuals with "admin" accounts can access areas/features/options that normal user accounts cannot.)
