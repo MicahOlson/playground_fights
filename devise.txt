@@ -41,3 +41,46 @@ PASSWORD_REQUIREMENTS = /\A
 /x
 
 validates :password, format: PASSWORD_REQUIREMENTS
+
+
+================================================================================
+
+
+
+LOCATIONS
+Seesaw
+Merry-go-round
+Swingset
+Slide
+Jungle gym
+Chin-up bars
+Sandbox
+Spring rider
+Trapeze rings
+Playhouse
+Maze
+
+BULLIES
+Becky
+Madison
+Mercedes
+Heather
+Amberley
+Biff
+Tripp
+Porter
+Jarrett
+Thad
+Shep
+
+ITEMS
+Slingshot
+Rubberbands
+Paper Airplane
+Magic Ink
+Crayons
+Juice Box
+Hoodie
+Wooly Willy
+Legos
+Silly Putty
